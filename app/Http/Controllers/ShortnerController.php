@@ -19,12 +19,17 @@ class ShortnerController extends Controller
 
     // Generate Short Url
     public function store(Request $request) { 
+
+        $request->validate([
+            'url' => 'required',
+            'expiry' => 'date'
+        ]);
+
+        $longUrl = $request->input('url');
+        $expiry = $request->input('expiry')?? null;
+        $token = $this->generateUniqueId();
         
         try { 
-            $longUrl = $request->input('url');
-            $expiry = $request->input('expiry')?? null;
-            $token = $this->generateUniqueId();
-
             $url = UrlTokens::create([
                 'destinationUrl' => $longUrl,
                 'shortUrl' => $token,

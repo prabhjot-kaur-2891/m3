@@ -32,8 +32,8 @@ class RedirectController extends Controller
                     abort(404);
                 } else {                    
                     return view('url', [
-                            'url' => env('APP_URL').'/'.$url->destinationUrl,
-                        ]);
+                        'url' => env('APP_URL').'/'.$url->destinationUrl,
+                    ]);
                 }
             } else {
                 abort(404);

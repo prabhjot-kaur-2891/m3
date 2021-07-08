@@ -15,13 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\ShortnerController;
+use App\Http\Controllers\UrlController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('shortUrl', [ShortnerController::class, 'store']);
-
-// Route::post('/shortUrl', function(Request $request) {
-//     return ShortnerController::store($request->all);
-// });
-
-//Route::post('/shortUrl/{url}/{expiry?}', 'ShortnerController@getShortUrl');
+Route::post('shortUrls', [UrlController::class, 'store']);
