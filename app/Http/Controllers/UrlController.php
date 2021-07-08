@@ -47,7 +47,7 @@ class UrlController extends Controller
     }
 
     private function generateUniqueId() {        
-        $token = substr(md5(uniqid(rand(), true)),0,8);
+        $token = substr(md5(uniqid()),0,8);
 
         $url = UrlTokens::select('*')
                     ->where('shortUrl', $token)
