@@ -30,10 +30,18 @@ class RedirectController extends Controller
             if($url) {
                 if($url->expiry && strtotime($url->expiry) < strtotime($currentTime)) {
                     abort(404);
-                } else {                    
-                    return view('url', [
-                        'url' => env('APP_URL').'/'.$url->destinationUrl,
-                    ]);
+                } else {     
+                    UrlTokens::where('shortUrl', $token)
+                            ->update(
+                                    array(
+                                        'hits'=> \DB::raw('hits+1')
+                                    )
+                                );
+
+                    header('location:'.$url->destinationUrl);
+                    // return view('url', [
+                    //     'url' => env('APP_URL').'/'.$url->destinationUrl,
+                    // ]);
                 }
             } else {
                 abort(404);

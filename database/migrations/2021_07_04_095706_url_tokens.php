@@ -17,6 +17,7 @@ class UrlTokens extends Migration
             $table->id()->autoIncrement();
             $table->string('destinationUrl', 255);
             $table->string('shortUrl', 20)->unique()->collation('utf8_bin');
+            $table->integer('hits')->default(0);
             $table->dateTime('expiry')->nullable();
             $table->timestamps();
         });
